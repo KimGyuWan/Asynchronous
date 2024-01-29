@@ -21,10 +21,10 @@ apiRouter.get("/", (req, res, next) => {
   // req.query ( get: 주소창 ), req.body ( post: 글쓰기 )
   const botable = req.query.botable
 
-  // req.body.crud = "select";
+  req.body.crud = "select";
   // req.query.crud = "select";
-  // req.body.botable = botable
-  // next("route")
+  req.body.botable = botable
+  next("route")
 })
 
 apiRouter.use("/", mysqlcontact)
