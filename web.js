@@ -9,7 +9,7 @@ const apiRouter = require("./server/api/api");
 nodeserver.use(express.static(path.join(__dirname, "./front/build")))
 
 nodeserver.get("/", (req, res) => {
-  res.send(path.join(__dirname, "./front//build/index.html"));
+  res.send(path.join(__dirname, "./front/build/index.html"));
 })
 
 nodeserver.use("/api", apiRouter);
