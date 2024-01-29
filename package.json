@@ -11,9 +11,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com"
+    "url": "y5g5776@selfpage.cafe24app.com:y5g5776_selfpage"
   },
-  "author": "BangBoYeung",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
