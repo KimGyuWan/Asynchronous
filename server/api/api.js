@@ -68,7 +68,7 @@ apiRouter.post("/", (req, res, next) => {
   const wid = req.query.wid;
   const w = req.query.w // update
 
-  if (w !== "") {
+  if (w == "" && botable !== undefined) {
     req.body.crud = "select"; // crud
     req.body.botable = botable; // table이름
     req.body.id = wid; // pk
