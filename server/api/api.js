@@ -11,20 +11,85 @@ const mysqlcontact = require("../mysqlcontact");
 apiRouter.use(express.json())
 // 받을 때
 apiRouter.use(express.urlencoded({ extended: true }))
-// query방식은 12번째 라인 명령이 꼭 있어야 읽을 수 있다.
-// params방식은 12번째 라인 명령이 없어도 된다.
+// query방식은 윗라인 명령이 꼭 있어야 읽을 수 있다.
+// params방식은 윗라인 명령이 없어도 된다.
 
-apiRouter.get("/", (req, res, next) => {
-  // localhost:8003/api?bo_table=gallery
-  // req -> res
-  // req -> next -> req -> res (종료)
-  // req.query ( get: 주소창 ), req.body ( post: 글쓰기 )
-  const botable = req.query.botable
+// apiRouter.post("/:tablenm/:wid/:w", (req, res, next) => {
+//   // /api/galerry/10/u?subject=바꿀꺼
 
-  req.body.crud = "select";
-  // req.query.crud = "select";
-  req.body.botable = botable
-  next("route")
+//   const botable = req.params.tablenm;
+//   const wid = req.params.wid;
+//   const w = req.params.w;
+
+//   if (w !== "") {
+//     req.body.crud = "select"; // crud
+//     req.body.botable = botable; // table이름
+//     req.body.id = wid; // pk
+//     next("route")
+//   } else if (w === "u") {
+//     req.body.crud = "update"; // crud
+//     req.body.botable = botable; // table이름
+//     req.body.id = wid; // pk
+//     next("route")
+//   } else if (w === "i") {
+//     req.body.crud = "insert"; // crud
+//     req.body.botable = botable; // table이름
+//     next("route")
+//   } else if (w === "d") {
+//     req.body.crud = "delete"; // crud
+//     req.body.botable = botable; // table이름
+//     req.body.id = wid; // pk
+//     next("route")
+//   } else {
+//     res.send("올바르지 않은 query입니다.")
+//   }
+// })
+
+apiRouter.post("/", (req, res, next) => {
+  //   // 리액트 요청할 때 post하면 대응해줄게
+  //   // localhost:8003/api?bo_table=gallery
+
+  //   // req( 리액트 useState 변수 비워두기, useEffect axios 실행 ) -> res( 노드 )
+
+  //   // req( 리액트 주소 queryString, params ) ->
+  //   // next( 나의 특정변수 추가해서 넘길 때 ) ->
+  //   // 다음라우터( mysql 라우터 ) -> req( 나의 특정변수 접수 ) -> 
+  //   // 노드 -> res( 전송 ) -> 리액트( then(변수) -> 변수.data )
+  //   // req.query ( get: 주소창 ), req.body ( post: 글쓰기 )
+
+  //   // req.body ( post: 글쓰기 postman으로 확인하기 )
+
+  //   // 목록 /api?bo_table=gallery  상세보기 /api?bo_table=gallery&wid=10
+  //   // 수정 /api?bo_table=gallery&wid=10&w=u
+  //   // 삽입 /api?bo_table=gallery&w=i
+  //   // 삭제 /api?bo_table=gallery&wid=10&w=d
+
+  const botable = req.query.botable;
+  const wid = req.query.wid;
+  const w = req.query.w // update
+
+  if (w !== "") {
+    req.body.crud = "select"; // crud
+    req.body.botable = botable; // table이름
+    req.body.id = wid; // pk
+    next("route")
+  } else if (w === "u") {
+    req.body.crud = "update"; // crud
+    req.body.botable = botable; // table이름
+    req.body.id = wid; // pk
+    next("route")
+  } else if (w === "i") {
+    req.body.crud = "insert"; // crud
+    req.body.botable = botable; // table이름
+    next("route")
+  } else if (w === "d") {
+    req.body.crud = "delete"; // crud
+    req.body.botable = botable; // table이름
+    req.body.id = wid; // pk
+    next("route")
+  } else {
+    res.send("올바르지 않은 query입니다.")
+  }
 })
 
 apiRouter.use("/", mysqlcontact)

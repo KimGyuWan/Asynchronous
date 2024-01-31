@@ -1,0 +1,1 @@
+cafe24 node server의 EntryPoint web.js는 반드시 루트디렉토리에 있어야한다.
