@@ -21,7 +21,7 @@ naviapp.post('/', (req, res, next) => {
   if (w == "") {
     req.body.crud = "select"
     req.body.botable = botable;
-    req.body.i = i;  // where 문
+    req.body.id = id;  // where 문
     next("route")
   } else if (w == "i") {
     req.body.crud = "insert"
@@ -30,12 +30,12 @@ naviapp.post('/', (req, res, next) => {
   } else if (w == "u") {
     req.body.crud = "update"
     req.body.botable = botable;
-    req.body.i = i;
+    req.body.id = id;
     next("route")
   } else if (w == "d") {
     req.body.crud = "delete"
     req.body.botable = botable;
-    req.body.i = i;
+    req.body.id = id;
     next("route")
   } else {
     res.send("잘못된 접근입니다.")
