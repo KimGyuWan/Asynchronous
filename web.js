@@ -5,6 +5,8 @@ const port = 8003;
 
 // 라우터 끌고오는 방법
 const apiRouter = require("./server/api/api");
+const datain = require("./newData/routers/datain");
+const navi = require("./server/navi")
 
 nodeserver.use(express.static(path.join(__dirname, "./front/build")))
 
@@ -13,6 +15,8 @@ nodeserver.get("/", (req, res) => {
 })
 
 nodeserver.use("/api", apiRouter);
+nodeserver.use("/data", datain);
+nodeserver.use("/navi", navi);
 
 
 
